@@ -1,0 +1,33 @@
+.image-modal {
+  transition: visibility 0s, opacity .5s ease;
+  position: absolute;
+  z-index: 99;
+}
+.image-modal_opened_true {
+  visibility: visible;
+  opacity: 1;
+}
+.image-modal_opened_false {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.image-modal__image {
+  max-width: 75vw;
+  max-height: 75vh;
+  object-position: center;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+.image-modal__title {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #fff;
+  text-align: left;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

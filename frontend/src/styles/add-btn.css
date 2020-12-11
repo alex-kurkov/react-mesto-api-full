@@ -1,0 +1,26 @@
+.add-btn {
+  box-sizing: border-box;
+  width: 150px;
+  height: 50px;
+  padding: 0;
+  margin-right: 2px;
+  border: solid 2px white;
+  border-radius: 2px;
+  background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: initial;
+}
+
+@media screen and (max-width: 960px) {
+  .add-btn {
+    width: 100%;
+    margin: 0 auto;
+  } 
+}
+
+.add-btn:hover {
+    opacity: .6;
+    transition: opacity linear .2s;
+    cursor: pointer;
+}

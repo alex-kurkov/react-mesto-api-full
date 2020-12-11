@@ -1,0 +1,27 @@
+.modal {
+  box-sizing: border-box;
+  position: absolute;
+  width: 430px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  padding: 36px;
+  transition: visibility 0s, opacity .5s ease;
+  z-index: 99;
+}
+
+@media screen and (max-width: 480px) {
+  .modal {
+    width: 240px;
+    padding: 30px 20px;
+  }
+}
+
+.modal_visible_true {
+  visibility: visible;
+  opacity: 1;
+}
+.modal_visible_false {
+  visibility: hidden;
+  opacity: 0;
+}

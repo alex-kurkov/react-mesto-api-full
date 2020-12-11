@@ -1,0 +1,31 @@
+.edit-btn {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  border: solid 1px #fff;
+  margin-left: 8px;
+  cursor: pointer;
+  align-self: center;
+  justify-self: center;
+}
+
+@media screen and (max-width: 520px) {
+  .edit-btn {
+    width: 18px;
+    height: 18px;
+    margin-left: 4px;
+  }
+}
+
+.edit-btn:hover {
+  opacity: .6;
+  transition: opacity linear .2s;
+}
+
+.edit-btn:focus {
+  outline: thin;
+}

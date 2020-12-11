@@ -1,0 +1,10 @@
+.auth-section {
+  margin: 0 auto;
+  height: calc(100vh - 260px);
+  max-width: 358px;
+}
+@media screen and (max-width: 480px) {
+  .auth-section {
+    max-width: calc(100% - 36px);
+  }
+}
