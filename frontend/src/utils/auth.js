@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3300';
+const baseUrl = 'http://kurkov.students.nomoreparties.xyz';
 
 const getResponseData = (res) => {
   return new Promise((resolve, reject) => {
@@ -15,6 +15,7 @@ const register = ({ password, email }) => {
       },
       method: 'POST',
       body: JSON.stringify({ password, email }),
+      credentials: 'include',
     })
   .then(getResponseData)
 }
