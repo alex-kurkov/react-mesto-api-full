@@ -16,7 +16,7 @@ const signupValidator = celebrate({
 
 const updateCardValidator = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24).required()
+    id: Joi.string().length(24).required()
   }),
   cookies: Joi.object().keys({
     jwt: Joi.string().required()
@@ -24,7 +24,7 @@ const updateCardValidator = celebrate({
 })
 const postCardValidator = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().alphanum().min(2).max(30).required(),
+    name: Joi.string().min(2).max(30).required(),
     link: Joi.string().uri().required()
   }),
 })

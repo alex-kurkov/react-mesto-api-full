@@ -13,7 +13,7 @@ import EditProfilePopup from './Popups/EditProfilePopup';
 import EditAvatarPopup from './Popups/EditAvatarPopup';
 import AddPlacePopup from './Popups/AddPlacePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { login, register, checkToken } from '../utils/auth';
+import { login, register, checkToken, logout } from '../utils/auth';
 import api from '../utils/api';
 
 const App = () => {
@@ -39,7 +39,7 @@ const App = () => {
     checkToken()
       .then(((res) => {
         setLoggedIn(true);
-/*         setUserAuthData(res.data); */
+        setUserAuthData(res.data);
       }))
       .catch((e) => console.log(e))
   }
@@ -58,7 +58,8 @@ const App = () => {
         api.getCards()
       ])
         .then(([ userData, serverCards ]) => {
-          setCurrentUser(userData);
+          const user = userData.data;
+          setCurrentUser(user);
           setCards(serverCards);
         })
         .catch((e) => console.log('status', e))
@@ -90,7 +91,7 @@ const App = () => {
     setLoaderVisibible(true);
     api.setUserData(data)
     .then((userData) => {
-      setCurrentUser(userData);
+      setCurrentUser({...currentUser, ...userData});
       closeAllPopups();
     })
     .catch((error) => console.log(error))
@@ -128,7 +129,7 @@ const App = () => {
     setLoaderVisibible(true);
     api.setAvatar(avatar)
       .then((userData) => {
-        setCurrentUser(userData);
+        setCurrentUser({...currentUser, ...userData});
         closeAllPopups();
       })
       .catch((error) => console.log(error))
@@ -180,8 +181,9 @@ const App = () => {
       .finally(() => setLoaderVisibible(false))
   };
   const handleLogout = () => {
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
+    logout()
+      .then(() => setLoggedIn(false))
+      .catch((e) => console.log(e))
   }
 
   return (

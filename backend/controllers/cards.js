@@ -4,7 +4,7 @@ const { NotFoundError, ForbiddenError } = require('../errors/index');
 module.exports.getCards = (req, res, next) => {
   Card.find()
     .orFail(new NotFoundError('карточки не найдены'))
-    .then((cards) => res.status(200).send({ data: cards }))
+    .then((cards) => res.status(200).send(cards))
     .catch(next);
 };
 
@@ -14,9 +14,9 @@ module.exports.postCard = (req, res, next) => {
   Card.create({
     name,
     link,
-    owner: req.user._id,
+    owner: { _id: req.user._id },
   })
-    .then((card) => res.status(200).send({data: card}))
+    .then((card) => res.status(200).send(card))
     .catch(next);
 };
 
@@ -39,12 +39,12 @@ const handleLike = (method) => (req, res, next) => {
 
   Card.findByIdAndUpdate(
     req.params.cardId,
-    { [method]: { likes: req.user._id } },
+    { [method]: { likes: {_id: req.user._id} } },
     { new: true },
   )
     .orFail(new NotFoundError('карточка не найдена'))
     .then((card) => {
-      res.status(200).send({ message, data: card });
+      res.status(200).send(card);
     })
     .catch(next);
 };

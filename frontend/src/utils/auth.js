@@ -1,9 +1,11 @@
 const baseUrl = 'http://localhost:3300';
 
-const getResponseData = (response) => {
-  if (response.ok) return response.json();
-  return Promise.reject(response);
-};
+const getResponseData = (res) => {
+  return new Promise((resolve, reject) => {
+    const func = res.ok ? resolve : reject;
+    res.json().then(func)
+  })
+}
 
 const register = ({ password, email }) => {
   return fetch(`${baseUrl}/signup`,
@@ -14,15 +16,7 @@ const register = ({ password, email }) => {
       method: 'POST',
       body: JSON.stringify({ password, email }),
     })
-  .then((res) => getResponseData(res))
-  .catch((e) => {
-    switch (e.status) {
-      case 400:
-        return Promise.reject({ message: 'Пользователь с таким email уже зарегистрирован' });
-      default:
-        return Promise.reject({ message: 'Что-то пошло не так! Попробуйте ещё раз.' });
-    }
-  })
+  .then(getResponseData)
 }
 
 const login = ({ password, email }) => fetch(
@@ -33,18 +27,22 @@ const login = ({ password, email }) => fetch(
     },
     method: 'POST',
     body: JSON.stringify({ password, email }),
+    credentials: 'include',
   })
-  .then((res) => getResponseData(res))
-  .catch((e) => {
-    switch (e.status) {
-      case 400:
-        return Promise.reject({ message: 'Не передано одно из полей' });
-      case 401:
-        return Promise.reject({ message: 'Пользователь с такой парой email/пароль не найден' });
-      default:
-        return Promise.reject({ message: 'Что-то пошло не так! Попробуйте ещё раз.' });
-    }
+  .then(getResponseData)
+
+const logout = () => {
+  return fetch(`${baseUrl}/signout`,
+    {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    method: 'POST'
   })
+  .then(getResponseData)
+}
 
 const checkToken = () => {
   return fetch(`${baseUrl}/users/me`,
@@ -52,19 +50,11 @@ const checkToken = () => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'credentials': 'include',
     },
+    credentials: 'include',
     method: 'GET'
   })
-  .then((res) => getResponseData(res))
-  .catch((e) => {
-    switch (e.status) {
-      case 401:
-        return Promise.reject({ message: 'Токен не передан или передан не в том формате' });
-      default:
-        return Promise.reject({ message: 'Что-то пошло не так! Попробуйте ещё раз.' });
-    }
-  })
+  .then(getResponseData)
 }
 
-export { register, login, checkToken }
+export { register, login, checkToken, logout }

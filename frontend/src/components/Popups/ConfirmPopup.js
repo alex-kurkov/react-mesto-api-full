@@ -16,7 +16,7 @@ const ConfirmPopup = ({
       <Form
         onSubmit={onSubmit}
         title="Вы уверены?"
-        formButtonText="Сохранить"
+        formButtonText="Да"
         belongsTo="modal"
         anyInputInvalid={false} />
     </Modal>
