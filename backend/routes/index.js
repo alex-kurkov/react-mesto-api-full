@@ -8,6 +8,12 @@ const cardsRouter = require('./cards');
 const usersRouter = require('./users');
 const notFoundRouter = require('./404');
 
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 router.post('/signup', signupValidator, createUser);
 router.post('/signin', loginValidator, login);
 router.post('/signout', logout);
