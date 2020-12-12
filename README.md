@@ -56,8 +56,9 @@ After deployment **Mesto app** is available to make requests at [http://localhos
 The values of body object and parameters referring to database queries are validated by Mongo DB engine. Errors are handled by mongoose and responsed to user if occured.
 
 ## Technologies used
-backend is built using [Express framework](https://expressjs.com/) and [Mongo Database](https://www.mongodb.com/) thru [mongoose library](https://mongoosejs.com/docs/)
-frontent is built using [React library](https://reactjs.org/)
+backend is built using [Express framework](https://expressjs.com/) and [Mongo Database](https://www.mongodb.com/) thru [mongoose library](https://mongoosejs.com/docs/)\
+frontent is built using [React library](https://reactjs.org/)\
+both are deployed using [Yandex Cloud](https://cloud.yandex.ru/)
 
 --------
 [connect me via email](mailto:alexkourkov@yandex.ru "Email")
