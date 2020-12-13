@@ -1,10 +1,12 @@
+const celebrate = require('celebrate');
+
 const errorHandler = (err, req, res, next) => {
   let error = {
     statusCode: err.statusCode || 500,
     message: err.message || 'Ошибка сервера',
   };
-  // 404
-  if (err.statusCode === 400 && err.message.beginsWith('celebrate')) {
+  // 404 and 403 errors are passed through immutated  
+  if (isCelebrateError(err)) {
     error.message = 'Переданные данные не прошли валидацию';
   }
   if (err.name === 'ValidationError') {
