@@ -5,7 +5,7 @@
 assembled and tuned by **Alex Kurkov**,
 _Yandex.Practicum student_
 
-[Visit site](https://alex-kurkov.github.io/mesto-react/)
+[Visit site](http://kurkov.students.nomoreparties.xyz/)
 
 ### **Content**
   - [About](#About-Server-Mesto)
