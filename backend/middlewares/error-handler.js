@@ -3,7 +3,10 @@ const errorHandler = (err, req, res, next) => {
     statusCode: err.statusCode || 500,
     message: err.message || 'Ошибка сервера',
   };
-
+  // 404
+  if (err.statusCode === 400 && err.message.beginsWith('celebrate')) {
+    error.message = 'Переданные данные не прошли валидацию';
+  }
   if (err.name === 'ValidationError') {
     error.statusCode = 401;
     error.message = err.message;

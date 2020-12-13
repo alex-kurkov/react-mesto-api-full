@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use('', router);
 app.use(errorLogger);
-app.use(errors());
+/* app.use(errors()); */ // tranfer celebrate error handling to next middleware
 app.use(errorHandler);
 
 app.listen(PORT, () => {
