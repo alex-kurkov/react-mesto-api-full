@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const router = require('./routes/index');
 const { errors } = require('celebrate');
-/* const cookieParser = require('cookie-parser');
-const cors = require('cors'); */
+/* const cookieParser = require('cookie-parser');*/
+const cors = require('cors');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3300, DOMAIN_NAME = 'localhost:3000' } = process.env;
@@ -24,6 +24,7 @@ app.use(cors({
   credentials: true,
 }))
 app.use(cookieParser());*/
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
