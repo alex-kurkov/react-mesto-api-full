@@ -27,7 +27,7 @@ app.use(cookieParser());*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-app.use('/api', router);
+app.use('', router);
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
