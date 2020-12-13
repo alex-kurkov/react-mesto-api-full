@@ -7,6 +7,14 @@ _Yandex.Practicum student_
 
 [Visit site](http://kurkov.students.nomoreparties.xyz/)
 
+REST API at:\
+ssl-protected: https://api.kurkov.students.nomoreparties.xyz
+
+http: http://api.kurkov.students.nomoreparties.xyz
+
+see [Usage](#Usage) for REST API requests
+
+
 ### **Content**
   - [About](#About-Server-Mesto)
   - [Setting Up](#Setting-Up)
@@ -41,17 +49,16 @@ Notice, that you should have Node-JS of version 14+ installed as well as Mongo D
 ## Usage
 After deployment **Mesto app** is available to make requests at [http://localhost:3000/](http://localhost:3000/)
 
-# Routes and methods:
+# REST API Routes and methods:
   - GET:'/cards'  *get all the cards from DB* 
   - POST:'/cards' *post new card to DB*
   - DELETE:'/cards/{id}' *delete card of provided {id}*
   - PUT:'cards/{id}/likes' *like card of provided {id}*
   - DELETE:'cards/{id}/likes' *dislike card of provided {id}*
 
-  - GET:'/users/{id}' *get user of provided {id}* 
   - POST:'/users' *save new user to DB*
-  - PATCH:'/users/me' *update name & about keys of default user*
-  - PATCH:'/users/me/avatar' *update avatar link of default user*
+  - PATCH:'/users/me' *update name & about keys of authorized user*
+  - PATCH:'/users/me/avatar' *update avatar link of authorized user*
 
 The values of body object and parameters referring to database queries are validated by Mongo DB engine. Errors are handled by mongoose and responsed to user if occured.
 

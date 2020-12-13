@@ -8,17 +8,16 @@ const cardsRouter = require('./cards');
 const usersRouter = require('./users');
 const notFoundRouter = require('./404');
 
-router.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
 router.post('/signup', signupValidator, createUser);
 router.post('/signin', loginValidator, login);
 router.post('/signout', logout);
 router.use('/cards', auth, cardsRouter);
 router.use('/users', auth, usersRouter);
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 router.use('*', notFoundRouter);
 
 module.exports = router;
