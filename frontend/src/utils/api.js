@@ -1,5 +1,3 @@
-import { AuthorizationError } from "../../../backend/errors";
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -82,7 +80,7 @@ class Api {
 }
 
 export default new Api({
-  baseUrl: 'http://kurkov.students.nomoreparties.xyz/api',
+  baseUrl: 'http://api.kurkov.students.nomoreparties.xyz',
   headers: {
     'content-type': 'application/json',
     'authorization': `Bearer ${localStorage.getItem('jwt')}`

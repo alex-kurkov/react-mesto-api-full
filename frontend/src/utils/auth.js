@@ -1,4 +1,4 @@
-const baseUrl = 'http://kurkov.students.nomoreparties.xyz/api';
+const baseUrl = 'http://api.kurkov.students.nomoreparties.xyz';
 
 const getResponseData = (res) => {
   return new Promise((resolve, reject) => {
