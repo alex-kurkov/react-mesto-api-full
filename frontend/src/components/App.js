@@ -94,7 +94,8 @@ const App = () => {
 
   const handleUpdateUser = (data) => {
     setLoaderVisibible(true);
-    api.setUserData(data)
+    const jwt = localStorage.getItem('jwt');
+    api.setUserData(data, jwt)
     .then((userData) => {
       setCurrentUser({...currentUser, ...userData});
       closeAllPopups();
@@ -103,9 +104,10 @@ const App = () => {
     .finally(() => setLoaderVisibible(false));
   };
 
-  const handleCardLike = (card) => {
+  const handleCardLike = (card, ) => {
+    const jwt = localStorage.getItem('jwt');
     const isLiked = card.likes.some(item => item._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked)
+    api.changeLikeCardStatus(card._id, !isLiked, jwt)
     .then((newCard) => {
       const newCards = cards.map((c) => c._id === card._id ? newCard : c);
       setCards(newCards);
@@ -119,8 +121,9 @@ const App = () => {
   };
 
   const handleCardDelete = (card) => {
+    const jwt = localStorage.getItem('jwt');
     setLoaderVisibible(true);
-    api.deleteCard(card)
+    api.deleteCard(card, jwt)
       .then(() => {
         const newCards = cards.filter((i) => i._id !== card._id);
         setCards(newCards);
@@ -132,8 +135,9 @@ const App = () => {
   };
 
   const handleUpdateAvatar = (avatar) => {
+    const jwt = localStorage.getItem('jwt');
     setLoaderVisibible(true);
-    api.setAvatar(avatar)
+    api.setAvatar(avatar, jwt)
       .then((userData) => {
         setCurrentUser({...currentUser, ...userData});
         closeAllPopups();
@@ -141,9 +145,9 @@ const App = () => {
       .catch((error) => console.log(error))
       .finally(() => setLoaderVisibible(false));
   };
-  const handleCardAdd = (card) => {
+  const handleCardAdd = (card, jwt) => {
     setLoaderVisibible(true);
-    api.postCard(card)
+    api.postCard(card, jwt)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups()
@@ -156,6 +160,7 @@ const App = () => {
     setLoaderVisibible(true);
     login(data)
       .then((res) => {
+        console.log(res);
         if (res.token) {
           localStorage.setItem('jwt', res.token);
           history.push('/main');
