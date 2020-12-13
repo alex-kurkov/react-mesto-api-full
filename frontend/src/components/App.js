@@ -35,8 +35,8 @@ const App = () => {
 
   const history = useHistory();
  
-  const checkUserToken = () => {
-    checkToken()
+  const checkUserToken = (jwt) => {
+    checkToken(jwt)
       .then(((res) => {
         setLoggedIn(true);
         setUserAuthData(res.data);
@@ -45,9 +45,12 @@ const App = () => {
   }
 
   useEffect(() => {
-    setLoaderVisibible(true);
-    checkUserToken();
-    setLoaderVisibible(false);
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      setLoaderVisibible(true);
+      checkUserToken(jwt);
+      setLoaderVisibible(false);
+    }
   }, [])
 
   useEffect(() => {
@@ -58,6 +61,8 @@ const App = () => {
         api.getCards()
       ])
         .then(([ userData, serverCards ]) => {
+          const jwt = localStorage.getItem('jwt');
+          if (jwt) checkUserToken(jwt);
           const user = userData.data;
           setCurrentUser(user);
           setCards(serverCards);
@@ -97,6 +102,7 @@ const App = () => {
     .catch((error) => console.log(error))
     .finally(() => setLoaderVisibible(false));
   };
+
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(item => item._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
@@ -150,11 +156,14 @@ const App = () => {
     setLoaderVisibible(true);
     login(data)
       .then((res) => {
-        history.push('/main');
-        setLoggedIn(true);
-        setHeaderAuthStatus('logout');
-        setTooltipMessage('Вы успешно прошли аутентификацию!');
-        setInfoTooltipOpen(true);
+        if (res.token) {
+          localStorage.setItem('jwt', res.token);
+          history.push('/main');
+          setLoggedIn(true);
+          setHeaderAuthStatus('logout');
+          setTooltipMessage('Вы успешно прошли аутентификацию!');
+          setInfoTooltipOpen(true);
+        }
       })
     .catch(e => {
       setTooltipMessage(e.message);
@@ -181,9 +190,11 @@ const App = () => {
       .finally(() => setLoaderVisibible(false))
   };
   const handleLogout = () => {
-    logout()
+/*     logout()
       .then(() => setLoggedIn(false))
-      .catch((e) => console.log(e))
+      .catch((e) => console.log(e)) */
+      localStorage.removeItem('jwt');
+      setLoggedIn(false);
   }
 
   return (

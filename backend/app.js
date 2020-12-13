@@ -1,12 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const router = require('./routes/index');
 const { errors } = require('celebrate');
-const helmet = require('helmet');
-const cors = require('cors');
+/* const cookieParser = require('cookie-parser');
+const cors = require('cors'); */
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3300, DOMAIN_NAME = 'localhost:3000' } = process.env;
@@ -18,13 +17,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-const whitelist = ['http://localhost:3000', `https://${DOMAIN_NAME}`, `http://${DOMAIN_NAME}`];
+// should solve this later on!
+/* const whitelist = ['http://localhost:3000', `https://${DOMAIN_NAME}`, `http://${DOMAIN_NAME}`];
 app.use(cors({
   origin : whitelist,
   credentials: true,
 }))
-app.use(helmet());
-app.use(cookieParser());
+app.use(cookieParser());*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);

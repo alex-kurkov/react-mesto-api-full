@@ -37,20 +37,21 @@ const logout = () => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
+/*     credentials: 'include', */
     method: 'POST'
   })
   .then(getResponseData)
 }
 
-const checkToken = () => {
+const checkToken = (jwt) => {
   return fetch(`${baseUrl}/users/me`,
    {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'authorization': `Bearer ${jwt}`
     },
-    credentials: 'include',
+/*     credentials: 'include', */
     method: 'GET'
   })
   .then(getResponseData)

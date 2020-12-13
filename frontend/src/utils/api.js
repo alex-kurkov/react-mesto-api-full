@@ -1,3 +1,5 @@
+import { AuthorizationError } from "../../../backend/errors";
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -15,7 +17,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: 'GET',
-      credentials: 'include',
+/*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -25,7 +27,7 @@ class Api {
       headers: this._headers,
       method: 'POST',
       body: JSON.stringify({ name, link }),
-      credentials: 'include',
+/*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -34,7 +36,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       headers: this._headers,
       method: 'DELETE',
-      credentials: 'include',
+/*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -43,7 +45,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
-      credentials: 'include',
+/*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -52,7 +54,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: 'PATCH',
-      credentials: 'include',
+/*       credentials: 'include', */
       body: JSON.stringify({ name, about }),
     })
       .then(this._getResponseData);
@@ -62,7 +64,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: 'PATCH',
-      credentials: 'include',
+/*       credentials: 'include', */
       body: JSON.stringify(data),
     })
       .then(this._getResponseData);
@@ -72,7 +74,7 @@ class Api {
     const method = isLiked ? 'PUT' : 'DELETE';
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       headers: this._headers,
-      credentials: 'include',
+/*       credentials: 'include', */
       method,
     })
       .then(this._getResponseData);
@@ -82,6 +84,7 @@ class Api {
 export default new Api({
   baseUrl: 'http://kurkov.students.nomoreparties.xyz/api',
   headers: {
-    'content-type': 'application/json'
+    'content-type': 'application/json',
+    'authorization': `Bearer ${localStorage.getItem('jwt')}`
   },
 });
