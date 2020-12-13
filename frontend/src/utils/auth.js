@@ -1,4 +1,4 @@
-const baseUrl = 'http://kurkov.students.nomoreparties.xyz';
+const baseUrl = 'http://kurkov.students.nomoreparties.xyz/api';
 
 const getResponseData = (res) => {
   return new Promise((resolve, reject) => {
@@ -27,7 +27,6 @@ const login = ({ password, email }) => fetch(
     },
     method: 'POST',
     body: JSON.stringify({ password, email }),
-    credentials: 'include',
   })
   .then(getResponseData)
 

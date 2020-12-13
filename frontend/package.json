@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* alex-kurkov@178.154.233.70:/home/alex-kurkov/frontend"
+    "deploy": "npm run build && scp -r ./build/* alex-kurkov@178.154.233.70:/home/alex-kurkov/mesto-front"
   },
   "eslintConfig": {
     "extends": "react-app"

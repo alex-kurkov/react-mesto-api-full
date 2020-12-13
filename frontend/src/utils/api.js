@@ -80,7 +80,7 @@ class Api {
 }
 
 export default new Api({
-  baseUrl: 'http://kurkov.students.nomoreparties.xyz',
+  baseUrl: 'http://kurkov.students.nomoreparties.xyz/api',
   headers: {
     'content-type': 'application/json'
   },
