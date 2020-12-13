@@ -13,14 +13,14 @@ import EditProfilePopup from './Popups/EditProfilePopup';
 import EditAvatarPopup from './Popups/EditAvatarPopup';
 import AddPlacePopup from './Popups/AddPlacePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { login, register, checkToken, logout } from '../utils/auth';
+import { login, register, checkToken } from '../utils/auth';
 import api from '../utils/api';
 
 const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  const [userAuthData, setUserAuthData] = useState({});
+  const [userAuthData, setUserAuthData] = useState({email: ''});
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [isConfirmPopupOpen, setConfirmPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setEditProfileOpen] = useState(false);
@@ -39,7 +39,7 @@ const App = () => {
     checkToken(jwt)
       .then(((res) => {
         setLoggedIn(true);
-        setUserAuthData(res.data);
+        setUserAuthData(res);
       }))
       .catch((e) => console.log(e))
   }
