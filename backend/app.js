@@ -9,7 +9,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { PORT = 3300, DOMAIN_NAME } = process.env;
+const { PORT = 3300, DOMAIN_NAME = 'localhost:3000' } = process.env;
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {

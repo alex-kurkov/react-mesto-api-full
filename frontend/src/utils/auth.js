@@ -15,7 +15,6 @@ const register = ({ password, email }) => {
       },
       method: 'POST',
       body: JSON.stringify({ password, email }),
-      credentials: 'include',
     })
   .then(getResponseData)
 }
