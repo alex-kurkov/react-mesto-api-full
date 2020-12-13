@@ -11,7 +11,7 @@ module.exports.getUsers = (req, res, next) => {
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(new NotFoundError('пользователь не найден'))
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send(user))
     .catch(next);
 };
 
@@ -27,7 +27,7 @@ module.exports.patchAvatar = (req, res, next) => {
     },
   )
     .orFail(new NotFoundError('пользователь не найден'))
-    .then(() => res.status(200).send({ message: 'аватар обновлен', avatar }))
+    .then((user) => res.status(200).send(user))
     .catch(next)
 };
 
@@ -43,6 +43,6 @@ module.exports.updateUser = (req, res, next) => {
     },
   )
     .orFail()
-    .then((user) => res.status(200).send({ message: 'данные пользователя обновлены', name: user.name, about: user.about }))
+    .then((user) => res.status(200).send(user))
     .catch(next);
 };

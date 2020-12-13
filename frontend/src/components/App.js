@@ -54,16 +54,16 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (loggedIn) {
+    const jwt = localStorage.getItem('jwt');
+    if (loggedIn && jwt) {
       setLoaderVisibible(true);
       Promise.all([
-        api.getUserData(),
-        api.getCards()
+        api.getUserData(jwt),
+        api.getCards(jwt)
       ])
-        .then(([ userData, serverCards ]) => {
+        .then(([ user, serverCards ]) => {
           const jwt = localStorage.getItem('jwt');
           if (jwt) checkUserToken(jwt);
-          const user = userData.data;
           setCurrentUser(user);
           setCards(serverCards);
         })
@@ -97,7 +97,7 @@ const App = () => {
     const jwt = localStorage.getItem('jwt');
     api.setUserData(data, jwt)
     .then((userData) => {
-      setCurrentUser({...currentUser, ...userData});
+      setCurrentUser(userData);
       closeAllPopups();
     })
     .catch((error) => console.log(error))
@@ -139,14 +139,15 @@ const App = () => {
     setLoaderVisibible(true);
     api.setAvatar(avatar, jwt)
       .then((userData) => {
-        setCurrentUser({...currentUser, ...userData});
+        setCurrentUser(userData);
         closeAllPopups();
       })
       .catch((error) => console.log(error))
       .finally(() => setLoaderVisibible(false));
   };
-  const handleCardAdd = (card, jwt) => {
+  const handleCardAdd = (card) => {
     setLoaderVisibible(true);
+    const jwt = localStorage.getItem('jwt');
     api.postCard(card, jwt)
       .then((newCard) => {
         setCards([newCard, ...cards]);
