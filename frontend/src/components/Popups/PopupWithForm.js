@@ -6,10 +6,10 @@ import Modal from './Modal';
 import { CloseButton } from '../Buttons/index';
 
 const PopupWithForm = ({
-  title, 
-  children, 
-  isOpen, 
-  onClose, 
+  title,
+  children,
+  isOpen,
+  onClose,
   onSubmit,
   anyInputInvalid,
 }) => (
@@ -20,23 +20,23 @@ const PopupWithForm = ({
         onSubmit={onSubmit}
         title={title}
         formButtonText="Сохранить"
-        children={children}
         belongsTo="modal"
-        anyInputInvalid={anyInputInvalid}
-      />
+        anyInputInvalid={anyInputInvalid}>
+          { children }
+      </ Form>
     </Modal>
   </Overlay>
 );
 
 PopupWithForm.propTypes = {
-  title:  PropTypes.string,
+  title: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object,
     PropTypes.element,
   ]),
   isOpen: PropTypes.bool,
-  onClose:  PropTypes.func,
+  onClose: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
   anyInputInvalid: PropTypes.bool.isRequired,
 };

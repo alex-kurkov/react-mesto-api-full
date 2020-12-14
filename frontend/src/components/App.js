@@ -1,5 +1,8 @@
+/* eslint no-shadow: ["error", { "allow": ["jwt"] }] */
 import React, { useEffect, useState } from 'react';
-import { Switch, Redirect, Route, useHistory } from 'react-router-dom';
+import {
+  Switch, Redirect, Route, useHistory,
+} from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Header from './Header';
 import Main from './Main';
@@ -12,15 +15,14 @@ import ConfirmPopup from './Popups/ConfirmPopup';
 import EditProfilePopup from './Popups/EditProfilePopup';
 import EditAvatarPopup from './Popups/EditAvatarPopup';
 import AddPlacePopup from './Popups/AddPlacePopup';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import { login, register, checkToken } from '../utils/auth';
 import api from '../utils/api';
 
 const App = () => {
-
   const [loggedIn, setLoggedIn] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  const [userAuthData, setUserAuthData] = useState({email: ''});
+  const [userAuthData, setUserAuthData] = useState({ email: '' });
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [isConfirmPopupOpen, setConfirmPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setEditProfileOpen] = useState(false);
@@ -29,20 +31,20 @@ const App = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [cardToDelete, setCardToDelete] = useState(null);
   const [cards, setCards] = useState([]);
-  const [isLoaderVisible, setLoaderVisibible] = useState(false)
+  const [isLoaderVisible, setLoaderVisibible] = useState(false);
   const [headerAuthStatus, setHeaderAuthStatus] = useState('login');
   const [tooltipMessage, setTooltipMessage] = useState('');
 
   const history = useHistory();
- 
+
   const checkUserToken = (jwt) => {
     checkToken(jwt)
       .then(((res) => {
         setLoggedIn(true);
         setUserAuthData(res);
       }))
-      .catch((e) => console.log(e))
-  }
+      .catch((e) => console.log(e));
+  };
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -51,7 +53,7 @@ const App = () => {
       checkUserToken(jwt);
       setLoaderVisibible(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -59,9 +61,9 @@ const App = () => {
       setLoaderVisibible(true);
       Promise.all([
         api.getUserData(jwt),
-        api.getCards(jwt)
+        api.getCards(jwt),
       ])
-        .then(([ user, serverCards ]) => {
+        .then(([user, serverCards]) => {
           const jwt = localStorage.getItem('jwt');
           if (jwt) checkUserToken(jwt);
           setCurrentUser(user);
@@ -69,10 +71,10 @@ const App = () => {
         })
         .catch((e) => console.log('status', e))
         .finally(() => {
-          setLoaderVisibible(false)
+          setLoaderVisibible(false);
           history.push('/main');
           setHeaderAuthStatus('logout');
-      })
+        });
     }
   }, [loggedIn]);
 
@@ -96,23 +98,23 @@ const App = () => {
     setLoaderVisibible(true);
     const jwt = localStorage.getItem('jwt');
     api.setUserData(data, jwt)
-    .then((userData) => {
-      setCurrentUser(userData);
-      closeAllPopups();
-    })
-    .catch((error) => console.log(error))
-    .finally(() => setLoaderVisibible(false));
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setLoaderVisibible(false));
   };
 
-  const handleCardLike = (card, ) => {
+  const handleCardLike = (card) => {
     const jwt = localStorage.getItem('jwt');
-    const isLiked = card.likes.some(item => item._id === currentUser._id);
+    const isLiked = card.likes.some((item) => item._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked, jwt)
-    .then((newCard) => {
-      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
-      setCards(newCards);
-    })
-    .catch((error) => console.log(error));
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleTrashBtnClick = (card) => {
@@ -151,7 +153,7 @@ const App = () => {
     api.postCard(card, jwt)
       .then((newCard) => {
         setCards([newCard, ...cards]);
-        closeAllPopups()
+        closeAllPopups();
       })
       .catch((error) => console.log(error))
       .finally(() => setLoaderVisibible(false));
@@ -171,12 +173,12 @@ const App = () => {
           setInfoTooltipOpen(true);
         }
       })
-    .catch(e => {
-      setTooltipMessage(e.message);
-      setInfoTooltipOpen(true);
-    })
-    .finally(() => setLoaderVisibible(false))
-  }
+      .catch((e) => {
+        setTooltipMessage(e.message);
+        setInfoTooltipOpen(true);
+      })
+      .finally(() => setLoaderVisibible(false));
+  };
 
   const handleRegister = (data) => {
     setLoaderVisibible(true);
@@ -193,15 +195,15 @@ const App = () => {
         setInfoTooltipOpen(true);
         history.push('/sign-up');
       })
-      .finally(() => setLoaderVisibible(false))
+      .finally(() => setLoaderVisibible(false));
   };
   const handleLogout = () => {
-/*     logout()
+    /*     logout()
       .then(() => setLoggedIn(false))
       .catch((e) => console.log(e)) */
-      localStorage.removeItem('jwt');
-      setLoggedIn(false);
-  }
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -221,7 +223,9 @@ const App = () => {
                 onCardDelete={handleTrashBtnClick}
                 component={Main} />
               {!isLoaderVisible && <Route path="/sign-up">
-                <Register handleRegister={handleRegister} setHeaderAuthStatus={setHeaderAuthStatus}/>
+                <Register
+                  handleRegister={handleRegister}
+                  setHeaderAuthStatus={setHeaderAuthStatus}/>
               </Route>}
               {!isLoaderVisible && <Route path="/sign-in">
                 <Login handleLogin={handleLogin} setHeaderAuthStatus={setHeaderAuthStatus}/>
@@ -233,24 +237,24 @@ const App = () => {
           </main>
         <Footer />
       {isLoaderVisible && (<div className="loader" />)}
-       
+
       <ImagePopup card={selectedCard || ''} onClose={closeAllPopups}/>)
-       
-      <ConfirmPopup 
-        isOpen={isConfirmPopupOpen} 
+
+      <ConfirmPopup
+        isOpen={isConfirmPopupOpen}
         onClose={closeAllPopups}
         onSubmit={(e) => {
           e.preventDefault();
           handleCardDelete(cardToDelete);
         }} />
 
-      <EditProfilePopup 
-        isOpen={isEditProfilePopupOpen} 
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser} />
 
-      <EditAvatarPopup 
-        isOpen={isEditAvatarPopupOpen} 
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         onUpdateAvatar={handleUpdateAvatar} />
 
@@ -268,5 +272,5 @@ const App = () => {
       </div>
     </CurrentUserContext.Provider>
   );
-}
+};
 export default App;

@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import { LikeButton, TrashButton } from './Buttons/index';
 
-const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
-  const { name, link, owner, likes } = card;
+const Card = ({
+  card, onCardClick, onCardLike, onCardDelete,
+}) => {
+  const {
+    name, link, owner, likes,
+  } = card;
 
   const handleCardClick = () => {
     onCardClick(card);
@@ -33,7 +37,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
       {isOwn && <TrashButton title="Удалить" onClick={handleCardDelete} />}
     </li>
   );
-}
+};
 
 Card.propTypes = {
   card: PropTypes.object.isRequired,

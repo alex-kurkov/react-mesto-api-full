@@ -25,7 +25,7 @@ const Login = ({ handleLogin, setHeaderAuthStatus }) => {
   useEffect(() => {
     setErrors(validate(values));
   }, [values]);
-  
+
   useEffect(() => {
     checkFormValidity();
   }, [errors]);
@@ -38,10 +38,10 @@ const Login = ({ handleLogin, setHeaderAuthStatus }) => {
     e.preventDefault();
     handleLogin(values);
   };
-  
+
   useEffect(() => {
     setHeaderAuthStatus('register');
-  }, [])
+  }, []);
 
   return (
     <section className="auth-section">
@@ -86,7 +86,8 @@ const Login = ({ handleLogin, setHeaderAuthStatus }) => {
           </label>
       </Form>
     </section>
-)};
+  );
+};
 
 Login.propTypes = {
   handleLogin: PropTypes.func.isRequired,

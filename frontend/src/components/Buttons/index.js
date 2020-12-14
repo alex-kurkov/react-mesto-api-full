@@ -7,4 +7,13 @@ import LikeButton from './LikeButton';
 import SuccessIcon from './SuccessIcon';
 import FailureIcon from './FailureIcon';
 
-export { SuccessIcon, FailureIcon, LikeButton, AddButton, CloseButton, EditButton, AvatarEditButton, TrashButton };
+export {
+  SuccessIcon,
+  FailureIcon,
+  LikeButton,
+  AddButton,
+  CloseButton,
+  EditButton,
+  AvatarEditButton,
+  TrashButton,
+};

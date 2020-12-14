@@ -1,11 +1,11 @@
 const { isCelebrateError } = require('celebrate');
 
-const errorHandler = (err, req, res, next) => {
-  let error = {
+const errorHandler = (err, req, res) => {
+  const error = {
     statusCode: err.statusCode || 500,
     message: err.message || 'Ошибка сервера',
   };
-  // 404 and 403 errors are passed through immutated  
+  // 404 and 403 errors are passed through immutated
   if (isCelebrateError(err)) {
     error.message = 'Переданные данные не прошли валидацию';
   }
@@ -15,7 +15,7 @@ const errorHandler = (err, req, res, next) => {
   }
   if (err.name === 'MongoError') {
     error.statusCode = 409;
-    error.message = 'Пользователь с таким email уже зарегистрирован'
+    error.message = 'Пользователь с таким email уже зарегистрирован';
   }
   if (err.name === 'CastError') {
     error.statusCode = 422;
@@ -26,6 +26,6 @@ const errorHandler = (err, req, res, next) => {
     error.message = 'нет соединения с базой данных';
   }
   res.status(error.statusCode).send({ message: error.message });
-}
+};
 
 module.exports = errorHandler;

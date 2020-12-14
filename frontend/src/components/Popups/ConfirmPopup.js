@@ -5,7 +5,7 @@ import { CloseButton } from '../Buttons/index';
 import Form from '../Form';
 import Modal from './Modal';
 
-const ConfirmPopup = ({ 
+const ConfirmPopup = ({
   isOpen,
   onClose,
   onSubmit,
@@ -25,7 +25,7 @@ const ConfirmPopup = ({
 
 ConfirmPopup.propTypes = {
   isOpen: PropTypes.bool,
-  onClose:  PropTypes.func,
+  onClose: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
 };
 

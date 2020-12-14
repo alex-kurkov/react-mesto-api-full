@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const LikeButton = ({ onClick, liked }) => (
   <button className="like-btn" onClick={onClick}>
     <svg width="100%" height="100%" viewBox="0 0 50 50" fill="#000" xmlns="http://www.w3.org/2000/svg">
-      <path 
+      <path
         fill={liked ? '#000' : '#fff'}
         fillRule="nonzero"
         stroke="#000"
@@ -16,7 +16,7 @@ const LikeButton = ({ onClick, liked }) => (
 
 LikeButton.propTypes = {
   liked: PropTypes.bool,
-  onClick:  PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default LikeButton;

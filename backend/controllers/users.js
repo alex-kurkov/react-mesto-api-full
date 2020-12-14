@@ -28,7 +28,7 @@ module.exports.patchAvatar = (req, res, next) => {
   )
     .orFail(new NotFoundError('пользователь не найден'))
     .then((user) => res.status(200).send(user))
-    .catch(next)
+    .catch(next);
 };
 
 module.exports.updateUser = (req, res, next) => {

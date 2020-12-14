@@ -8,6 +8,6 @@ const Footer = () => {
       <span className="footer__copyright">&copy; {yearNow} Mesto Russia</span>
     </footer>
   );
-}
+};
 
 export default Footer;

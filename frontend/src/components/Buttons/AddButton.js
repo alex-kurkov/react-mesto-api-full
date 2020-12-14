@@ -10,7 +10,7 @@ const AddButton = ({ onClick }) => (
 );
 
 AddButton.propTypes = {
-  onClick:  PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default AddButton;

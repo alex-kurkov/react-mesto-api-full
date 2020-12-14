@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import validate from '../../utils/validation';
 import PopupWithForm from './PopupWithForm';
 
-const AddPlacePopup = ({ onCardAdd, isOpen, onClose}) => {
+const AddPlacePopup = ({ onCardAdd, isOpen, onClose }) => {
   const [errors, setErrors] = useState({
     name: '',
     link: '',
@@ -52,9 +52,9 @@ const AddPlacePopup = ({ onCardAdd, isOpen, onClose}) => {
           <input
             className={`form__input form__input_border_black form__input_color_${errors.name ? 'red' : 'black'}`}
             value={values.name}
-            type="text" 
+            type="text"
             name="name"
-            placeholder="Название" 
+            placeholder="Название"
             onChange={handleInputChange}
             onFocus={() => setShowError({ name: true })}
             onBlur={() => setShowError({})}
@@ -80,11 +80,11 @@ const AddPlacePopup = ({ onCardAdd, isOpen, onClose}) => {
         </label>
 
     </PopupWithForm>);
-}
+};
 
 AddPlacePopup.propTypes = {
   isOpen: PropTypes.bool,
-  onClose:  PropTypes.func,
+  onClose: PropTypes.func,
   onCardAdd: PropTypes.func.isRequired,
 };
 

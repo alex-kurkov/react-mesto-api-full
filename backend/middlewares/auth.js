@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { AuthorizationError } = require('../errors/index');
 
@@ -14,11 +15,11 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(
       token,
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev'
-    )
-  } catch(e) {
-      throw new AuthorizationError('Авторизация отклонена - токен не валиден или истек');
-  } 
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev',
+    );
+  } catch (e) {
+    throw new AuthorizationError('Авторизация отклонена - токен не валиден или истек');
+  }
   req.user = payload;
-  next()
+  next();
 };

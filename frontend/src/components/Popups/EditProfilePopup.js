@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import validate from '../../utils/validation';
 import PopupWithForm from './PopupWithForm';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 const EditProfilePopup = ({ onUpdateUser, isOpen, onClose }) => {
   const currentUser = React.useContext(CurrentUserContext);
@@ -17,8 +17,8 @@ const EditProfilePopup = ({ onUpdateUser, isOpen, onClose }) => {
 
   useEffect(() => {
     setValues(currentUser);
-    }, [currentUser, isOpen]);
-  
+  }, [currentUser, isOpen]);
+
   const checkFormValidity = () => {
     const any = Object
       .values(errors)
@@ -54,13 +54,13 @@ const EditProfilePopup = ({ onUpdateUser, isOpen, onClose }) => {
           <input
             className={`form__input form__input_border_black form__input_color_${errors.name ? 'red' : 'black'}`}
             value={values.name}
-            type="textarea" 
+            type="textarea"
             rows="2"
             name="name"
             onChange={handleInputChange}
             onFocus={() => setShowError({ name: true })}
             onBlur={() => setShowError({})}
-            placeholder="Введите имя" 
+            placeholder="Введите имя"
             noValidate />
           {errors.name && <div className="form__error-indicator"/>}
           {errors.name && showError.name && <span className="form__error-message">{errors.name}</span>}
@@ -82,11 +82,11 @@ const EditProfilePopup = ({ onUpdateUser, isOpen, onClose }) => {
 
         </label>
     </PopupWithForm>);
-}
+};
 
 EditProfilePopup.propTypes = {
   isOpen: PropTypes.bool,
-  onClose:  PropTypes.func,
+  onClose: PropTypes.func,
   onUpdateUser: PropTypes.func.isRequired,
 };
 

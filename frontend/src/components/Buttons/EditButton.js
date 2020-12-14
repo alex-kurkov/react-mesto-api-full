@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const EditButton = ({ onClick }) => (
   <button onClick={onClick} className="edit-btn">
@@ -8,5 +9,9 @@ const EditButton = ({ onClick }) => (
     </svg>
   </button>
 );
+
+EditButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default EditButton;

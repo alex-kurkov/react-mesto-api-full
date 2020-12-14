@@ -8,4 +8,4 @@ module.exports = {
   ForbiddenError,
   NotFoundError,
   ValidationError,
-}
+};

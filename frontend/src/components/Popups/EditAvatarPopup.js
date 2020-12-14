@@ -55,7 +55,7 @@ const EditAvatarPopup = ({ onUpdateAvatar, isOpen, onClose }) => {
           <input
             className={`form__input form__input_border_black form__input_color_${errors.avatar ? 'red' : 'black'}`}
             value={values.avatar}
-            type="url" 
+            type="url"
             name="avatar"
             placeholder="Ссылка на новый аватар"
             onChange={handleInputChange}
@@ -68,11 +68,11 @@ const EditAvatarPopup = ({ onUpdateAvatar, isOpen, onClose }) => {
         </label>
 
     </PopupWithForm>);
-}
+};
 
 EditAvatarPopup.propTypes = {
   isOpen: PropTypes.bool,
-  onClose:  PropTypes.func,
+  onClose: PropTypes.func,
   onUpdateAvatar: PropTypes.func.isRequired,
 };
 

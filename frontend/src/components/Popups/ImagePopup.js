@@ -4,7 +4,7 @@ import Overlay from './Overlay';
 import { CloseButton } from '../Buttons/index';
 
 const ImagePopup = ({ card, onClose }) => {
-  const {link = '', name = ''} = card;
+  const { link = '', name = '' } = card;
   return (
     <Overlay onClick={onClose} isOpen={!!card}>
       <div className={`image-modal image-modal_opened_${!!card}`}>
@@ -14,17 +14,17 @@ const ImagePopup = ({ card, onClose }) => {
       </div>
     </Overlay>
   );
-}
+};
 
 ImagePopup.propTypes = {
   card: PropTypes.oneOfType([
     PropTypes.shape({
       link: PropTypes.string,
       name: PropTypes.string,
-    }), 
-    PropTypes.string
+    }),
+    PropTypes.string,
   ]),
-  onClose:  PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ImagePopup;

@@ -50,13 +50,13 @@ export default (values) => {
       errors.about = 'Напишите о себе хотя бы 2 символа... но не больше 300:)';
     }
   };
-  
-  if (values.hasOwnProperty('email')) validateEmail(values.email);
-  if (values.hasOwnProperty('password')) validatePassword(values.password);
-  if (values.hasOwnProperty('name')) validateName(values.name);
-  if (values.hasOwnProperty('about')) validateAbout(values.about);
-  if (values.hasOwnProperty('avatar')) validateUrl(values.avatar, 'avatar');
-  if (values.hasOwnProperty('link')) validateUrl(values.link, 'link');
-  
+
+  if (Object.prototype.hasOwnProperty.call(values, 'email')) validateEmail(values.email);
+  if (Object.prototype.hasOwnProperty.call(values, 'password')) validatePassword(values.password);
+  if (Object.prototype.hasOwnProperty.call(values, 'name')) validateName(values.name);
+  if (Object.prototype.hasOwnProperty.call(values, 'about')) validateAbout(values.about);
+  if (Object.prototype.hasOwnProperty.call(values, 'avatar')) validateUrl(values.avatar, 'avatar');
+  if (Object.prototype.hasOwnProperty.call(values, 'link')) validateUrl(values.link, 'link');
+
   return errors;
 };

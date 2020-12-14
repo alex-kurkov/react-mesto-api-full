@@ -11,7 +11,7 @@ const TrashButton = ({ onClick }) => (
 );
 
 TrashButton.propTypes = {
-  onClick:  PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default TrashButton;

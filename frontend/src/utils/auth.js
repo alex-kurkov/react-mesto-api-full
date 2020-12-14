@@ -1,23 +1,19 @@
 const baseUrl = 'http://api.kurkov.students.nomoreparties.xyz';
 
-const getResponseData = (res) => {
-  return new Promise((resolve, reject) => {
-    const func = res.ok ? resolve : reject;
-    res.json().then(func)
-  })
-}
+const getResponseData = (res) => new Promise((resolve, reject) => {
+  const func = res.ok ? resolve : reject;
+  res.json().then(func);
+});
 
-const register = ({ password, email }) => {
-  return fetch(`${baseUrl}/signup`,
-    {
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({ password, email }),
-    })
-  .then(getResponseData)
-}
+const register = ({ password, email }) => fetch(`${baseUrl}/signup`,
+  {
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ password, email }),
+  })
+  .then(getResponseData);
 
 const login = ({ password, email }) => fetch(
   `${baseUrl}/signin`,
@@ -27,34 +23,33 @@ const login = ({ password, email }) => fetch(
     },
     method: 'POST',
     body: JSON.stringify({ password, email }),
-  })
-  .then(getResponseData)
+  },
+)
+  .then(getResponseData);
 
-const logout = () => {
-  return fetch(`${baseUrl}/signout`,
-    {
+const logout = () => fetch(`${baseUrl}/signout`,
+  {
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-/*     credentials: 'include', */
-    method: 'POST'
+    /*     credentials: 'include', */
+    method: 'POST',
   })
-  .then(getResponseData)
-}
+  .then(getResponseData);
 
-const checkToken = (jwt) => {
-  return fetch(`${baseUrl}/users/me`,
-   {
+const checkToken = (jwt) => fetch(`${baseUrl}/users/me`,
+  {
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'authorization': `Bearer ${jwt}`
+      authorization: `Bearer ${jwt}`,
     },
-/*     credentials: 'include', */
-    method: 'GET'
+    /*     credentials: 'include', */
+    method: 'GET',
   })
-  .then(getResponseData)
-}
+  .then(getResponseData);
 
-export { register, login, checkToken, logout }
+export {
+  register, login, checkToken, logout,
+};

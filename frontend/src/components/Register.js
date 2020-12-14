@@ -25,7 +25,7 @@ const Register = ({ handleRegister, setHeaderAuthStatus }) => {
   useEffect(() => {
     setErrors(validate(values, errors));
   }, [values]);
-    
+
   useEffect(() => {
     checkFormValidity();
   }, [errors]);
@@ -38,10 +38,10 @@ const Register = ({ handleRegister, setHeaderAuthStatus }) => {
     e.preventDefault();
     handleRegister(values);
   };
-  
+
   useEffect(() => {
     setHeaderAuthStatus('login');
-  }, [])
+  }, []);
 
   return (
     <section className="auth-section">
@@ -87,7 +87,8 @@ const Register = ({ handleRegister, setHeaderAuthStatus }) => {
         </label>
       </Form>
     </section>
-)};
+  );
+};
 
 Register.propTypes = {
   handleRegister: PropTypes.func.isRequired,

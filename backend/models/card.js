@@ -1,25 +1,6 @@
 const mongoose = require('mongoose');
 const validate = require('validator');
 
-const currentUserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    default: 'Жак-Ив Кусто',
-    minlength: 2,
-    maxlength: 30,
-  },
-  about: {
-    type: String,
-    default: 'Исследователь',
-    minlength: 2,
-    maxlength: 30,
-  },
-  _id: {
-    type: String,
-    required: true,
-  },
-});
-
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -37,9 +18,13 @@ const cardSchema = new mongoose.Schema({
       message: ({ value }) => `${value} - некорректная ссылка`,
     },
   },
-  owner: currentUserSchema,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  },
   likes: {
-    type: [currentUserSchema],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     default: [],
   },
   createdAt: {

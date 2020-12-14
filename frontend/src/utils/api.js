@@ -1,23 +1,23 @@
 class Api {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
   }
 
-  _getResponseData(res) {
+  static _getResponseData(res) {
     return new Promise((resolve, reject) => {
       const func = res.ok ? resolve : reject;
-      res.json().then(func)
-    })
+      res.json().then(func);
+    });
   }
 
   getCards(jwt) {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`,
       },
       method: 'GET',
-/*       credentials: 'include', */
+      /*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -26,11 +26,11 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`,
       },
       method: 'POST',
       body: JSON.stringify({ name, link }),
-/*       credentials: 'include', */
+      /*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -39,10 +39,10 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`,
       },
       method: 'DELETE',
-/*       credentials: 'include', */
+      /*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -52,9 +52,9 @@ class Api {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`,
       },
-/*       credentials: 'include', */
+      /*       credentials: 'include', */
     })
       .then(this._getResponseData);
   }
@@ -63,10 +63,10 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`,
       },
       method: 'PATCH',
-/*       credentials: 'include', */
+      /*       credentials: 'include', */
       body: JSON.stringify({ name, about }),
     })
       .then(this._getResponseData);
@@ -76,10 +76,10 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`,
       },
       method: 'PATCH',
-/*       credentials: 'include', */
+      /*       credentials: 'include', */
       body: JSON.stringify(data),
     })
       .then(this._getResponseData);
@@ -90,9 +90,9 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        authorization: `Bearer ${jwt}`,
       },
-/*       credentials: 'include', */
+      /*       credentials: 'include', */
       method,
     })
       .then(this._getResponseData);
@@ -102,6 +102,6 @@ class Api {
 export default new Api({
   baseUrl: 'http://api.kurkov.students.nomoreparties.xyz',
   headers: {
-    'content-type': 'application/json'
+    'content-type': 'application/json',
   },
 });

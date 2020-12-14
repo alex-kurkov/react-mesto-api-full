@@ -1,27 +1,26 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Overlay from './Overlay';
-import { CloseButton } from '../Buttons/index';
-import { FailureIcon, SuccessIcon } from '../Buttons/index'
+import { CloseButton, FailureIcon, SuccessIcon } from '../Buttons/index';
+
 import Modal from './Modal';
 
-const InfoTooltip = ({ 
+const InfoTooltip = ({
   isOpen,
   onClose,
   success,
   message,
 }) => {
-
   useEffect(() => {
     window.addEventListener('keydown', onClose, {});
     return () => window.removeEventListener('keydown', onClose);
-  }, [])
+  }, []);
 
   return (
     <Overlay onClick={onClose} isOpen={isOpen}>
       <Modal isOpen={isOpen}>
         <CloseButton title="Закрыть" onClick={onClose} />
-        {success 
+        {success
           ? (
           <div className="info-tooltip">
             <SuccessIcon />
@@ -35,13 +34,13 @@ const InfoTooltip = ({
         }
     </Modal>
   </Overlay>
-  )
+  );
 };
 
 InfoTooltip.propTypes = {
-  message:  PropTypes.string,
+  message: PropTypes.string,
   isOpen: PropTypes.bool,
-  onClose:  PropTypes.func,
+  onClose: PropTypes.func,
   success: PropTypes.bool,
 };
 

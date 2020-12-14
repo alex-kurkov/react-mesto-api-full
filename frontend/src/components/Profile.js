@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import { EditButton, AddButton } from './Buttons/index';
 
 const Profile = ({ onEditAvatar, onAddPlace, onEditProfile }) => {
@@ -23,7 +23,7 @@ const Profile = ({ onEditAvatar, onAddPlace, onEditProfile }) => {
       </div>
     </section>
   );
-}
+};
 
 Profile.propTypes = {
   onEditAvatar: PropTypes.func.isRequired,
