@@ -13,7 +13,13 @@ const signupValidator = celebrate({
     password: Joi.string().required().min(8),
     name: Joi.string(),
     about: Joi.string(),
-    avatar: Joi.string().uri()
+    avatar: Joi.string().uri(),
+  }),
+});
+
+const getUserByIdValidator = celebrate({
+  params: Joi.object().keys({
+    postId: Joi.string().alphanum().length(24),
   }),
 });
 
@@ -50,4 +56,5 @@ module.exports = {
   postCardValidator,
   patchAvatarValidator,
   updateUserValidator,
+  getUserByIdValidator,
 };

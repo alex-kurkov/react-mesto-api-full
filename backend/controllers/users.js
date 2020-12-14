@@ -15,6 +15,14 @@ module.exports.getUser = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.getUserById = (req, res, next) => {
+  User.findById(req.params.id)
+    .orFail(new NotFoundError('пользователь не найден'))
+    .select('email, name, about, avatar')
+    .then((user) => res.status(200).send({ data: user }))
+    .catch(next);
+};
+
 module.exports.patchAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findByIdAndUpdate(
