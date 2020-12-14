@@ -8,6 +8,7 @@ const errorHandler = (err, req, res) => {
   // 404 and 403 errors are passed through immutated
   if (isCelebrateError(err)) {
     error.message = 'Переданные данные не прошли валидацию';
+    error.statusCode = 400;
   }
   if (err.name === 'ValidationError') {
     error.statusCode = 401;

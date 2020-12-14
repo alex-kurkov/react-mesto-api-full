@@ -3,7 +3,8 @@ class Api {
     this._baseUrl = baseUrl;
   }
 
-  static _getResponseData(res) {
+  /* eslint class-methods-use-this: ["error", { "exceptMethods": ["_getResponseData"] }] */
+  _getResponseData(res) {
     return new Promise((resolve, reject) => {
       const func = res.ok ? resolve : reject;
       res.json().then(func);
@@ -101,7 +102,4 @@ class Api {
 
 export default new Api({
   baseUrl: 'http://api.kurkov.students.nomoreparties.xyz',
-  headers: {
-    'content-type': 'application/json',
-  },
 });

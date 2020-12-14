@@ -5,13 +5,19 @@ env:
   node: true
 extends:
   - 'plugin:react/recommended'
-  - airbnb-base
+  - 'airbnb-base'
+  - 'plugin:import/errors'
+  - 'plugin:import/warnings'
 parserOptions:
   ecmaFeatures:
     jsx: true
-  ecmaVersion: 12
+  ecmaVersion: 10
 plugins:
   - react
 rules:   
   no-underscore-dangle: 0
   no-console: 0
+  import/named: 2
+  import/namespace: 2
+  import/default: 2
+  import/export: 2

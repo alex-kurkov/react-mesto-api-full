@@ -1,4 +1,3 @@
-/* eslint no-shadow: ["error", { "allow": ["jwt"] }] */
 import React, { useEffect, useState } from 'react';
 import {
   Switch, Redirect, Route, useHistory,
@@ -64,7 +63,6 @@ const App = () => {
         api.getCards(jwt),
       ])
         .then(([user, serverCards]) => {
-          const jwt = localStorage.getItem('jwt');
           if (jwt) checkUserToken(jwt);
           setCurrentUser(user);
           setCards(serverCards);
