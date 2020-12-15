@@ -1,7 +1,8 @@
-const errorHandler = (err, req, res) => {
+// eslint-disable-next-line no-unused-vars
+const errorHandler = (err, req, res, next) => {
   const error = {
     statusCode: err.statusCode || 500,
-    message: err.message || 'Ошибка сервера',
+    message: 'Ошибка сервера',
   };
   // 404 and 403 errors are passed through immutated
   if (err.name === 'ValidationError') {

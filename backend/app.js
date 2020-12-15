@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 /* const cookieParser = require('cookie-parser'); */
 const cors = require('cors');
-const router = require('./routes/index');
 const celebrateCustomErrorHandler = require('./middlewares/celebrateCustomErrorHandler');
+const router = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 

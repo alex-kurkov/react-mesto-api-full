@@ -266,7 +266,7 @@ const App = () => {
         isOpen={isInfoTooltipOpen}
         onClose={closeAllPopups}
         message={tooltipMessage}
-        success={loggedIn} />}
+        success={tooltipMessage === 'Вы успешно зарегистрировались!' ? true: loggedIn } />}
 
       </div>
     </CurrentUserContext.Provider>

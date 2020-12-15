@@ -6,8 +6,8 @@ class Api {
   /* eslint class-methods-use-this: ["error", { "exceptMethods": ["_getResponseData"] }] */
   _getResponseData(res) {
     return new Promise((resolve, reject) => {
-      const func = res.ok ? resolve : reject;
-      res.json().then(func);
+      const func = res.status < 400 ? resolve : reject;
+      res.json().then(data => func(data))
     });
   }
 
