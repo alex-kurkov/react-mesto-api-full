@@ -12,7 +12,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3300 } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect('mongodb://localhost:27017/mesto-db', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
