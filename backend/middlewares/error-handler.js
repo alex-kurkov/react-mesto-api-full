@@ -2,7 +2,7 @@
 const errorHandler = (err, req, res, next) => {
   const error = {
     statusCode: err.statusCode || 500,
-    message: 'Ошибка сервера',
+    message: err.message || 'Ошибка сервера',
   };
   // 404 and 403 errors are passed through immutated
   if (err.name === 'ValidationError') {
