@@ -108,7 +108,8 @@ const App = () => {
     const jwt = localStorage.getItem('jwt');
     const isLiked = card.likes.some((item) => item._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked, jwt)
-      .then((newCard) => {
+      .then((data) => {
+        const newCard = data.card;
         const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
         setCards(newCards);
       })
