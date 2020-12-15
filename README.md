@@ -55,7 +55,8 @@ After deployment **Mesto app** is available to make requests at [http://localhos
   - DELETE:'/cards/{id}' *delete card of provided {id}*
   - PUT:'cards/{id}/likes' *like card of provided {id}*
   - DELETE:'cards/{id}/likes' *dislike card of provided {id}*
-
+  - GET:'/users/{id}' *get user of provided {id}*
+  - GET:'/users/me' *get authorized user info*
   - POST:'/users' *save new user to DB*
   - PATCH:'/users/me' *update name & about keys of authorized user*
   - PATCH:'/users/me/avatar' *update avatar link of authorized user*
