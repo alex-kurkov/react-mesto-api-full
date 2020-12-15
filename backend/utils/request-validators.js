@@ -19,7 +19,7 @@ const signupValidator = celebrate({
 
 const getUserByIdValidator = celebrate({
   params: Joi.object().keys({
-    postId: Joi.string().alphanum().length(24),
+    id: Joi.string().alphanum().length(24),
   }),
 });
 

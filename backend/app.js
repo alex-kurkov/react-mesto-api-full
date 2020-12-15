@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 /* const cookieParser = require('cookie-parser'); */
 const cors = require('cors');
 const router = require('./routes/index');
+const celebrateCustomErrorHandler = require('./middlewares/celebrateCustomErrorHandler');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -30,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use('', router);
 app.use(errorLogger);
-/* app.use(errors()); */ // transfer celebrate error handling to next
+app.use(celebrateCustomErrorHandler);
 app.use(errorHandler);
 
 app.listen(PORT, () => {

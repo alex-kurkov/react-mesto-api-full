@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  getUsers, getUser, patchAvatar, updateUser, getUserById
+  getUsers, getUser, patchAvatar, updateUser, getUserById,
 } = require('../controllers/users');
 const {
   patchAvatarValidator,

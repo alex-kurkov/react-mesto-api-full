@@ -34,15 +34,19 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 const handleLike = (method) => (req, res, next) => {
+  const message = method === '$addToSet'
+    ? 'лайк!'
+    : 'лайк, только наоборот(';
+
   Card.findByIdAndUpdate(
     req.params.cardId,
-    { [method]: { likes: { _id: req.user._id } } },
+    { [method]: { likes: req.user._id } },
     { new: true },
   )
     .populate('likes')
     .orFail(new NotFoundError('карточка не найдена'))
     .then((card) => {
-      res.status(200).send(card);
+      res.status(200).send({ card, message });
     })
     .catch(next);
 };
